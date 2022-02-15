@@ -1,0 +1,140 @@
+﻿@model Manager.ModelsView.DetaljiRole_ModelView
+
+@{
+    ViewData["Title"] = "DetaljiRole";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>DetaljiRole</h1>
+
+<hr />
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3">
+            <div class="card">
+                <form asp-action="IzmeniRolu" asp-controller="Role" method="post">
+                    <h5 class="card-header" style="text-align:center; height:auto; padding:6px;">
+                        DETALJI ROLE
+                    </h5>
+                    <div class="card-body">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="RoleId" />
+                        <div class="form-group">
+                            <label asp-for="RoleNaziv" class="control-label"></label>
+                            <input asp-for="RoleNaziv" class="form-control" />
+                            <span asp-validation-for="RoleNaziv" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="card-footer text-muted" style="text-align:center; height:auto; padding:6px;">
+                        <div>
+                            <input type="submit" value="Izmeni Rolu" class="btn btn-primary" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-9">
+            <div class="card">
+                <h5 class="card-header" style="text-align:center; height:auto; padding:6px;">
+                    LISTA USERA KOJIMA JE DODELJENA OVA ROLA
+                </h5>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>User FirstName</th>
+                                <th>User LastName</th>
+                                <th>User Username</th>
+                                <th>User UserId</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Useri_u_ovoj_Roli)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.User.FirstName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.User.LastName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.UserCredential.Username)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Id)
+                                    </td>
+                                    <td>
+                                        <form asp-controller="Role" asp-action="ObrisiUseruRolu" asp-route-identityUserId="@item.Id" asp-route-roleId="@Model.RoleId" asp-route-RedirectController="@ViewContext.RouteData.Values["controller"]" asp-route-RedirectAction="@ViewContext.RouteData.Values["action"]" asp-route-RedirectID="@Model.RoleId" method="post">
+                                            <button type="submit" class="btn btn-primary">Obrisi Rolu ovom useru</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer text-muted" style="text-align:center; height:auto; padding:6px;">
+                    <div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <br />
+    <div class="row-fluid">
+        <div class="col-12">
+            <div class="card">
+                <h5 class="card-header" style="text-align:center; height:auto; padding:6px;">
+                    LISTA SVIH USERA KOJIMA NIJE DODELJENA OVA ROLA
+                </h5>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>User FirstName</th>
+                                <th>User LastName</th>
+                                <th>User Username</th>
+                                <th>User UserId</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Useri_koji_nisu_u_ovoj_Roli)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.User.FirstName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.User.LastName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.UserCredential.Username)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Id)
+                                    </td>
+                                    <td>
+                                        <form asp-controller="Role" asp-action="DodeliUseruRolu" asp-route-identityUserId="@item.Id" asp-route-roleId="@Model.RoleId" asp-route-RedirectController="@ViewContext.RouteData.Values["controller"]" asp-route-RedirectAction="@ViewContext.RouteData.Values["action"]" asp-route-RedirectID="@Model.RoleId" method="post">
+                                            <button type="submit" class="btn btn-primary">Dodeli ovu Rolu ovom useru</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer text-muted" style="text-align:center; height:auto; padding:6px;">
+                    <div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

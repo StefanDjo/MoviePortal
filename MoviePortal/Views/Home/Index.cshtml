@@ -1,0 +1,46 @@
+﻿@model Manager.ModelsView.Movies_ModelView
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+
+    <hr />
+    <div class="row">
+
+        <div class="col-6">
+            <div class="card">
+                <h5 class="card-header" style="text-align:center; height:auto; padding:6px;">
+                    LISTA DOSTUPNIH FILMOVA
+                </h5>
+                <div class="card-body">
+                    <partial name="~/Views/PartialView/_ListMovie.cshtml" model="@Model.listaMovieRent" />
+                </div>
+                <div class="card-footer text-muted" style="text-align:center; height:auto; padding:6px;">
+                    <div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-6">
+            <div class="card">
+                <h5 class="card-header" style="text-align:center; height:auto; padding:6px;">
+                    LISTA RENTIRANIH FILMOVA
+                </h5>
+                <div class="card-body">
+                    <partial name="~/Views/PartialView/_ListMovie.cshtml" model="@Model.listaMovieUnrent" />
+                </div>
+                <div class="card-footer text-muted" style="text-align:center; height:auto; padding:6px;">
+                    <div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

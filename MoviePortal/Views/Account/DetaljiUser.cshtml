@@ -1,0 +1,163 @@
+﻿@model Manager.ModelsView.DetaljiUser_ModelView
+
+@{
+    ViewData["Title"] = "DetaljiUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>DetaljiUser</h1>
+
+<hr />
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3">
+            <div class="card">
+                <form asp-action="IzmeniUser" asp-controller="Account" method="post">
+                    <h5 class="card-header" style="text-align:center; height:auto; padding:6px;">
+                        DETALJI USERA
+                    </h5>
+                    <div class="card-body">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="Id" />
+                        <div class="form-group">
+                            <label asp-for="FirstName" class="control-label"></label>
+                            <input asp-for="FirstName" class="form-control" />
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="LastName" class="control-label"></label>
+                            <input asp-for="LastName" class="form-control" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Email" class="control-label"></label>
+                            <input asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Phone1" class="control-label"></label>
+                            <input asp-for="Phone1" class="form-control" />
+                            <span asp-validation-for="Phone1" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Phone2" class="control-label"></label>
+                            <input asp-for="Phone2" class="form-control" />
+                            <span asp-validation-for="Phone2" class="text-danger"></span>
+                        </div>
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="Active" /> @Html.DisplayNameFor(model => model.Active)
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Username" class="control-label"></label>
+                            <input asp-for="Username" class="form-control" />
+                            <span asp-validation-for="Username" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Password" class="control-label"></label>
+                            <input asp-for="Password" class="form-control" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="DodeljeneRole" class="control-label"></label>
+                            <input asp-for="DodeljeneRole" disabled class="form-control" />
+                        </div>
+                    </div>
+                    <div class="card-footer text-muted" style="text-align:center; height:auto; padding:6px;">
+                        <div>
+                            <input type="submit" value="Izmeni usera" class="btn btn-primary" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-9">
+            <div class="row-fluid">
+                <div class="card">
+                    <h5 class="card-header" style="text-align:center; height:auto; padding:6px;">
+                        LISTA NEDODELJENIH ROLA
+                    </h5>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Role ID</th>
+                                    <th>Naziv Role</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Lista_nedodeljenih_Rola)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Id)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Name)
+                                        </td>
+                                        <td>
+                                            <form asp-controller="Role" asp-action="DodeliUseruRolu" asp-route-identityUserId="@Model.Id" asp-route-roleId="@item.Id" asp-route-RedirectController="@ViewContext.RouteData.Values["controller"]" asp-route-RedirectAction="@ViewContext.RouteData.Values["action"]" asp-route-RedirectID="@ViewContext.RouteData.Values["id"]" method="post">
+                                                <button type="submit" class="btn btn-primary">Dodeli ovu Rolu ovom useru</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer text-muted" style="text-align:center; height:auto; padding:6px;">
+                        <div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="card">
+                    <h5 class="card-header" style="text-align:center; height:auto; padding:6px;">
+                        LISTA DODELJENIH ROLA
+                    </h5>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Role ID</th>
+                                    <th>Naziv Role</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Lista_dodeljenih_Rola)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Id)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Name)
+                                        </td>
+                                        <td>
+                                            <form asp-controller="Role" asp-action="ObrisiUseruRolu" asp-route-identityUserId="@Model.Id" asp-route-roleId="@item.Id" asp-route-RedirectController="@ViewContext.RouteData.Values["controller"]" asp-route-RedirectAction="@ViewContext.RouteData.Values["action"]" asp-route-RedirectID="@ViewContext.RouteData.Values["id"]" method="post">
+                                                <button type="submit" class="btn btn-primary">Obrisi Rolu ovom useru</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer text-muted" style="text-align:center; height:auto; padding:6px;">
+                        <div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

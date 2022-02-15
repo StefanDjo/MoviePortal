@@ -1,0 +1,35 @@
+﻿@model Manager.ModelsView.Login_ModelView
+
+
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="row" style="justify-content:center; text-align:center">
+    <div class="col-2 align-self-center">
+        @if (ViewData["errorPoruka"] != null)
+        {
+            <h5 class="text-danger">@ViewData["errorPoruka"]</h5>
+        }
+        <h1>Login</h1>
+        <form asp-controller="Account" asp-action="Login">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Username" class="control-label"></label>
+                <input asp-for="Username" class="form-control" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Login" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>

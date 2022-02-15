@@ -1,0 +1,46 @@
+﻿@model Manager.ModelsView.DetaljiMovie_ModelView
+
+@{
+    ViewData["Title"] = "Detalji";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 style="text-align:center;">Detalji</h1>
+
+<div class="row" style="justify-content:center;">
+    <div class="col-4" >
+        <div class="card">
+            <h5 class="card-header" style="text-align:center; height:auto; padding:6px;">
+                @Html.DisplayFor(model => model.Title)
+            </h5>
+            <div class="card-body" style="display:flex; justify-content:center;">
+                <ul style="list-style-type: none; margin-bottom:0px; padding-left:0px">
+                    <li><label style="font-weight:700;">@Html.DisplayNameFor(model => model.Duration) : </label> @Html.DisplayFor(model => model.Duration)</li>
+                    <li><label style="font-weight:700;">@Html.DisplayNameFor(model => model.Author) : </label> @Html.DisplayFor(model => model.Author)</li>
+                    <li>
+                        <label style="font-weight:700;">@Html.DisplayNameFor(model => model.Available) : </label>
+                        @if (Model.Available == true)
+                        {
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check-lg checkBox" viewBox="0 0 16 16">
+                                <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z" />
+                            </svg>
+                        }
+                        else
+                        {
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x-lg checkBox" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z" />
+                                <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z" />
+                            </svg>
+                        }
+                    </li>
+                    <li><label style="font-weight:700;">@Html.DisplayNameFor(model => model.UserId) : </label> @Html.DisplayFor(model => model.UserId)</li>
+                </ul>
+            </div>
+            <div class="card-footer text-muted" style="text-align:center; height:auto; padding:6px;">
+                <div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

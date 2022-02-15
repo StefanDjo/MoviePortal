@@ -1,0 +1,78 @@
+﻿@model Manager.ModelsView.Role_ModelView
+
+@{
+    ViewData["Title"] = "Role";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Role</h1>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3">
+            <div class="card">
+                <form asp-action="KreirajRolu">
+                    <h5 class="card-header" style="text-align:center; height:auto; padding:6px;">
+                        NAPRAVI NOVU ROLU
+                    </h5>
+                    <div class="card-body">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="RoleNaziv" class="control-label"></label>
+                            <input asp-for="RoleNaziv" class="form-control" />
+                            <span asp-validation-for="RoleNaziv" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="card-footer text-muted" style="text-align:center; height:auto; padding:6px;">
+                        <div>
+                            <input type="submit" value="Kreiraj Rolu" class="btn btn-primary" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-9">
+            <div class="card">
+                <h5 class="card-header" style="text-align:center; height:auto; padding:6px;">
+                    LISTA ROLA
+                </h5>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Role ID</th>
+                                <th>Naziv Role</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.ListaRola)
+                            {
+                                <tr>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Id)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    <td>
+                                        <a asp-action="DetaljiRole" asp-controller="Role" asp-route-Id="@item.Id">Edit/Detalji</a>
+                                    </td>
+                                    <td>
+                                        <a asp-action="ObrisiRolu" asp-controller="Role" asp-route-Id="@item.Id">Obrisi Rolu</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer text-muted" style="text-align:center; height:auto; padding:6px;">
+                    <div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
